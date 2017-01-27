@@ -1,5 +1,10 @@
 @import "bootstrap";
 
+@font-face {
+  font-family: Cinzel;
+  src: url("Cinzel-Regular.otf");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,10 +13,12 @@
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  font-size: 90%;
 }
 
 body {
   color: #ffffff;
+  font-family: Cinzel, serif;
 }
 
 .main-screen {
