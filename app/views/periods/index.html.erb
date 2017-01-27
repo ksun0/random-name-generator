@@ -1,0 +1,17 @@
+<h1>Select a Period</h1>
+
+<%= link_to 'New Period', new_period_path, class: 'btn btn-outline-success btn-block' %>
+
+<p id="notice"><%= notice %></p>
+
+<% @periods.each do |period| %>
+<div class="card">
+  <h3 class="card-header"><%= period.name %></h3>
+  <div class="card-block">
+    <h4 class="card-title">Teacher: <%= period.teacher %></h4>
+    <p class="card-text">
+      <%= link_to 'Edit', edit_period_path(period) %> | <%= link_to 'Delete', period, method: :delete, data: { confirm: 'Are you sure?' } %><br></p>
+      <%= link_to 'Select', period, class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <% end %>

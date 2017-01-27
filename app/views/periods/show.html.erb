@@ -1,0 +1,56 @@
+<h1>
+  Period:
+  <%= @period.name %>
+</h1>
+
+
+<h3>
+  Teacher:
+  <%= @period.teacher %>
+</h3>
+
+<%= link_to '[Edit]', edit_period_path(@period) %>
+<%= link_to '[Back]', periods_path %>
+
+<p class="notice"><%= notice %></p>
+
+<h2 class="text-center" id="selected"></h2>
+<a id="button" href="#" class="btn btn-danger btn-block" style="margin-bottom: 30px;">Draw Next Name</a>
+<hr>
+<div class="row">
+  <%= render @period.students %>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for([@period, @period.students.new]) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <%= f.submit 'Add New Student', class: 'btn btn-primary'  %>
+
+    <% end %>
+  </div>
+</div>
+
+<script>
+
+$(document).ready(function() {
+  var array = <%= @period.students.all.pluck(:name).to_json.html_safe %>;
+
+  function refresh(){
+    var i = Math.floor(Math.random() * (array.length));
+    document.getElementById("selected").innerHTML = array[i];
+    array.splice(i, 1);
+    if(array.length == 0) {
+      array = <%= @period.students.all.pluck(:name).to_json.html_safe %>;
+    }
+  }
+
+  // call the method on button click:
+  $('#button').click(function(e){e.preventDefault(); refresh();}).click();
+});
+</script>
